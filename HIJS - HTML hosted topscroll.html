@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- Comment START
+Variables used in Google Ad Manager:
+GAM name / Code name / type
+fileURL / [%fileURL%] / file
+clickTag / [%clickTag%] / URL
+thirdPartyImpression / [%thirdPartyImpression%] / URL
+Comment END -->
+<!-- Version 2.1 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://video.seenthis.se/public/high-impact/client/1.0.0/client.js"></script>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Prevent scrolling on the page */
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Prevent scrollbars on the page */
+        }
+
+        /* Container style */
+        .ad-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Responsive iframe styling for topscrolls */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            object-fit: cover;
+            object-position: top;
+            overflow: hidden; /* Prevent internal scrolling */
+        }
+
+        /* Clickable overlay style */
+        .clickable-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0); /* Transparent overlay */
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-container">
+        <script>
+            (function () {
+                // Use the fileURL macro to point to the hosted HTML asset
+                const fileUrl = "[%fileURL%]?cb=%%CACHEBUSTER%%";  // Add cache-busting query parameter
+
+                // Create an iframe to display the hosted HTML asset
+                const iframe = document.createElement("iframe");
+                iframe.src = fileUrl;
+                iframe.allowTransparency = true;
+                iframe.setAttribute("scrolling", "no"); // Disable scrollbars on iframe
+
+                // Append iframe to the ad container
+                document.querySelector(".ad-container").appendChild(iframe);
+
+                // Set up clickTag functionality
+                const clickTag = "%%CLICK_URL_UNESC%%[%clickTag%]";
+                const overlay = document.createElement("a");
+                overlay.href = clickTag;
+                overlay.className = "clickable-overlay";  // Apply transparent overlay styles
+                overlay.target = "_blank";  // Open in a new tab
+
+                // Append the clickable overlay to the ad container
+                document.querySelector(".ad-container").appendChild(overlay);
+            })();
+        </script>
+    </div>
+  <img src="[%thirdPartyImpression%]" width="1" height="1" style="display:none;" />
+</body>
+</html>

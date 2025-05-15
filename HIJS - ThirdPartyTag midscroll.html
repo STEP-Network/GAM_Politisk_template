@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- Comment START
+Variables used in Google Ad Manager:
+GAM name / Code name / type
+thirdPartyTag / [%thirdPartyTag%] / tag
+clickTag / [%clickTag%] / URL
+thirdPartyImpression / [%thirdPartyImpression%] / URL
+Comment END -->
+<!-- Version 2.1 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://video.seenthis.se/public/high-impact/client/1.0.0/client.js"></script>
+  <style>
+    /* Container for scaling and centering */
+    #third-party-tag-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Responsive iframe styling to scale the third-party tag */
+    #third-party-tag-container iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="third-party-tag-container">
+      [%thirdPartyTag%]
+  </div>
+      <img src="[%thirdPartyImpression%]" width="1" height="1" style="display:none;" />
+</body>
+</html>
