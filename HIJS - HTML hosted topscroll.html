@@ -59,6 +59,50 @@ Comment END -->
             cursor: pointer;
             background-color: rgba(0, 0, 0, 0); /* Transparent overlay */
         }
+
+        /* Political ad overlay styles */
+        .info-tag {
+            position: absolute;
+            left: 50%;
+            top: 80vh;
+            transform: translate(-50%, -50%);
+            padding: 5px 10px;
+            background-color: rgba(128, 128, 128, 0.8);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            z-index: 15;
+            white-space: nowrap;
+        }
+        .text-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: black;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease-in-out;
+            z-index: 10;
+        }
+        .text-container.visible {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -86,6 +130,37 @@ Comment END -->
 
                 // Append the clickable overlay to the ad container
                 document.querySelector(".ad-container").appendChild(overlay);
+
+                // Add political ad overlay
+                const infoTag = document.createElement("div");
+                infoTag.className = "info-tag";
+                infoTag.textContent = "Politisk Annonce Info";
+                const textContainer = document.createElement("div");
+                textContainer.className = "text-container";
+                const annonceID = "[%annonceID%]";
+                const infoLink = document.createElement("a");
+                infoLink.href = `https://stepnetwork.dk/annonceID/${annonceID}`;
+                infoLink.target = "_blank";
+                infoLink.textContent = "læs mere her";
+                infoLink.style.marginLeft = "4px";
+                infoLink.style.textDecoration = "underline";
+                infoLink.style.color = "#0074d9";
+                const infoText = document.createElement("div");
+                infoText.style.textAlign = "center";
+                infoText.style.marginBottom = "10px";
+                infoText.append("Dette er en politisk annonce. For yderligere information, ");
+                infoText.appendChild(infoLink);
+                infoText.append(".");
+                textContainer.appendChild(infoText);
+                const annonceIDItem = document.createElement("div");
+                annonceIDItem.className = "text-item";
+                annonceIDItem.textContent = `Annonce ID# ${annonceID}`;
+                textContainer.appendChild(annonceIDItem);
+                infoTag.addEventListener("click", () => {
+                  textContainer.classList.toggle("visible");
+                });
+                document.body.appendChild(infoTag);
+                document.body.appendChild(textContainer);
             })();
         </script>
     </div>
